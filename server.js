@@ -17,6 +17,9 @@ import ReactDOM from 'react-dom/server';
 import app from './app';
 import HtmlComponent from './components/Html';
 import { createElementWithContext } from 'fluxible-addons-react';
+import api from './api/main';
+
+
 const env = JSON.stringify(process.env.NODE_ENV);
 
 const debug = debugLib('fluxible-todo');
@@ -25,6 +28,8 @@ const server = express();
 server.use('/public', express['static'](path.join(__dirname, '/build')));
 server.use(compression());
 server.use(bodyParser.json());
+
+api(server);
 
 server.use((req, res, next) => {
     const context = app.createContext();

@@ -1,23 +1,21 @@
-class TodosActions {
+import axios from 'axios';
 
-//	httpGetAsync(theUrl)
-//	{
-//		var xmlHttp = new XMLHttpRequest();
-//		xmlHttp.onreadystatechange = function() { 
-//			if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-//				return xmlHttp.responseText;
-//		}
-//		xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-//		xmlHttp.send(null);
-//	}
+class TodosActions {
 
 	getAllTasks(context, payload, callback) { 
 		console.log(context, payload, callback);
-		//const tasks = this.httpGetAsync('/todos/all');
-		context.dispatch('TASKS_RECEIVED', {  
-			tasks: tasks
+		axios.get('/todos/all')
+			.then(function (response) {
+			console.info(response.data.tasks);
+			const tasks = response.data.tasks
+			context.dispatch('TASKS_RECEIVED', {  
+				tasks: tasks
+			});
+			callback();  
+		})
+			.catch(function (error) {
+			console.info(error);
 		});
-		callback();  
 	}; 
 
 	component2() {

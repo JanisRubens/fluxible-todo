@@ -2,11 +2,13 @@
 
 import React from 'react';
 import TodosStore from '../stores/TodosStore';
-import { connectToStores } from 'fluxible-addons-react';
+import { connectToStores, provideContext } from 'fluxible-addons-react';
+import TodosActions from '../actions/todosActions';
 
 class Todos extends React.Component {
     render() {
-
+		//TodosActions.getAllTasks();
+		console.log(TodosActions.component2());
         return (
             <div>
 				TODOS

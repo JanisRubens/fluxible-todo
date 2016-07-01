@@ -21,7 +21,7 @@ var tempData = {
 router.get('/all', function( req, res ) {
 	res.json({
 		message: 'Data Collected!',
-		data: tempData
+		tasks: tempData
 	});
 });
 
@@ -34,7 +34,7 @@ router.post('/', function (req, res) { //req.params.id
 	}
 	res.json({
 		message: 'Todo Created! with id of ' + uniqid ,
-		data: tempData
+		tasks: tempData
 	});
 });
 
@@ -46,7 +46,7 @@ router.route('/todo/:id')
 		delete tempData[id];
 		res.json({
 			message: 'Todo with id of!' + id + ' deleted!',
-			data: tempData
+			tasks: tempData
 		});
 	} else {
 		res.json({
@@ -64,7 +64,7 @@ router.route('/todo/:id')
 		}
 		res.json({
 			message: 'Todo with id of!' + id + ' deleted!',
-			data: tempData
+			tasks: tempData
 		});
 	} else {
 		res.json({

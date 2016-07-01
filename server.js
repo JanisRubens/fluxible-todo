@@ -24,6 +24,9 @@ const env = JSON.stringify(process.env.NODE_ENV);
 
 const debug = debugLib('fluxible-todo');
 
+/* Regeister Services */
+app.getPlugin('FetchrPlugin').registerService(require('./services/todosService'));
+
 const server = express();
 server.use('/public', express['static'](path.join(__dirname, '/build')));
 server.use(compression());

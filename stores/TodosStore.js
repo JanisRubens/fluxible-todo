@@ -6,6 +6,7 @@ export default createStore({
         'TASKS_RECEIVED': 'handleReceivedTasks'
     },
     handleReceivedTasks: function (payload) {
+		console.log(payload.tasks);
         this.currentPageName = payload.tasks;
         this.emitChange();
     },

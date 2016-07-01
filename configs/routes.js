@@ -5,7 +5,7 @@ export default {
         page: 'home',
         title: 'Home',
         handler: require('../components/Todos'),
-		action: require('../actions/todosActions').getAllTasks()
+		action: require('../actions/todosActions')//.getAllTasks()
     },
     about: {
         path: '/about',

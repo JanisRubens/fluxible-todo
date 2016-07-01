@@ -4,7 +4,8 @@ export default {
         method: 'get',
         page: 'home',
         title: 'Home',
-        handler: require('../components/Home')
+        handler: require('../components/Todos'),
+		action: require('../actions/todosActions').getAllTasks()
     },
     about: {
         path: '/about',

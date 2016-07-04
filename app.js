@@ -5,13 +5,15 @@ import RouteStore from './stores/RouteStore';
 import TodosStore from './stores/TodosStore';
 
 const fetchr = require('fluxible-plugin-fetchr');
-const fetchrInstance = fetchr({
-    xhrPath: '/todos'
-});
+
 
 // create new fluxible instance
 const app = new Fluxible({
     component: Application
+});
+
+const fetchrInstance = fetchr({
+    xhrPath: '/api'
 });
 
 app.plug(fetchrInstance);

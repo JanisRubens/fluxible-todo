@@ -1,7 +1,5 @@
-import axios from 'axios';
-
-
-var tempData = {
+/*Service is the same as API, this is the place where i would IMPORT the DB schema and manipulate with it.*/
+const tempData = {
 	"1": {
 		completed: "true",
 		description: "I sometimes wish we could think of a better practice task"
@@ -16,38 +14,41 @@ var tempData = {
 	}
 }
 
-module.exports = {
-	name: "all",
-	read: function(req, resource, params, config, callback) {
-//		console.log('HALLLLo');
-//		axios.get('/todos/all')
-//			.then(function (response) {
-//			const tasks = response.data.tasks
-//			console.log(tasks);
-//			
-//		})
-//			.catch(function (error) {
-//			console.info("ERRROR:", error);
-//		});
-		console.log(arguments);
-		callback(null,  tempData);  
-	}
-}
+export default {
 
-//
-//
-//function getAllTasks (context, payload, callback) { 
-//	axios.get('/todos/all')
-//		.then(function (response) {
-//		const tasks = response.data.tasks
-//		context.dispatch('TASKS_RECEIVED', {  
-//			tasks: tasks
-//		});
-//		callback();  
-//	})
-//		.catch(function (error) {
-//		console.info("ERRROR:", error);
-//	});
-//};
-//
-//export default getAllTasks;
+	name: "todos",
+	create: function(req, resource, params, body, config, callback) {
+		const uniqid = Date.now(); //temporary solution.
+		const newTodo = {
+			completed: params.completed,
+			description: params.description
+		}
+		tempData[uniqid] = newTodo;
+		callback(null, newTodo);
+
+	},
+	read: function(req, resource, params, config, callback) {
+		callback(null, tempData );
+	},
+	update: function(req, resource, params, body, config, callback) {
+		var id = params.id;
+		if ( typeof(tempData[id]) !== "undefined" ) {
+			tempData[id] = {
+				completed: params.completed,
+				description: params.description
+			}
+			callback( null, tempData );
+		} else {
+			const err = new Error(' Cant update');
+			callback( err );
+		}
+	},
+	delete: function(req, resource, params, config, callback) {
+		var id = params.id;
+		if ( typeof(tempData[id]) !== "undefined" ) {
+			delete tempData[id];
+			callback(null, tempData);
+		}
+	}
+
+};

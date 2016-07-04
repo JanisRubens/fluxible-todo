@@ -24,15 +24,16 @@ const env = JSON.stringify(process.env.NODE_ENV);
 
 const debug = debugLib('fluxible-todo');
 
-/* Regeister Services */
-app.getPlugin('FetchrPlugin').registerService(require('./services/todosService'));
-
 const server = express();
 server.use('/public', express['static'](path.join(__dirname, '/build')));
 server.use(compression());
 server.use(bodyParser.json());
 
-api(server);
+//api(server); //registering api entry
+
+/* Regeister Services */
+app.getPlugin('FetchrPlugin').registerService(require('./services/todosService'));
+server.use(app.getPlugin('FetchrPlugin').getXhrPath(), app.getPlugin('FetchrPlugin').getMiddleware());
 
 server.use((req, res, next) => {
     const context = app.createContext();

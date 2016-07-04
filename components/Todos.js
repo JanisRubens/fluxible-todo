@@ -6,9 +6,10 @@ import { connectToStores, provideContext } from 'fluxible-addons-react';
 import TodosActions from '../actions/todosActions';
 
 class Todos extends React.Component {
+	
     render() {
-		//TodosActions.getAllTasks();
-		//console.log(TodosActions.component2());
+console.log(this.props.tasks);
+
         return (
             <div>
 				TODOS
@@ -21,9 +22,9 @@ export default connectToStores(
     Todos,
     [TodosStore],
     function (context, props) {
-        var todosStore = context.getStore(TodosStore);
+        //var todosStore = 
         return {
-            tasks: todosStore.getTasks()
+            tasks: context.getStore(TodosStore).getTasks()
         };
     }
 );
